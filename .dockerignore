@@ -18,6 +18,7 @@ instance/
 .flaskenv
 *.db
 *.sqlite3
+.flask-restx
 
 # IDE
 .vscode/
