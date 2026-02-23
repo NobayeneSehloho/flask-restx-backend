@@ -11,10 +11,10 @@ RESTful API built with Flask-RESTX, SQLAlchemy, and SQLite.
 - Health check endpoint
 - JWT authentication support
 
-## Requirements
+## Requirements (check the requirements.txt file for complete list)
 
 - Python 3.12+
-- Flask 2.3.2
+- Flask 3.1.3
 - Flask-RESTX 1.3.2
 - Flask-SQLAlchemy 3.0.3
 - Flask-CORS 6.0.0
