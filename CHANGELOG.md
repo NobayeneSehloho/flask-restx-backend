@@ -14,6 +14,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 ### Security
 
+## [1.0.1] - 2026-02-23
+
+### Security
+- Updated Flask from 2.3.2 to 3.1.3 (CVE fix)
+- Updated Werkzeug from 3.1.5 to 3.1.6 (CVE fix)
+- Updated blinker from 1.6.2 to 1.9.0 (required by Flask 3.1.3)
+- Updated itsdangerous from 2.1.2 to 2.2.0 (required by Flask 3.1.3)
+
 ## [1.0.0] - 2026-02-05
 
 ### Added
@@ -46,5 +54,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Flask-SQLAlchemy 3.0.3
 - SQLAlchemy 2.0.12
 
-[Unreleased]: https://github.com/yourusername/yourrepo/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/yourusername/yourrepo/compare/v1.0.1...HEAD
+[1.0.1]: https://github.com/yourusername/yourrepo/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/yourusername/yourrepo/releases/tag/v1.0.0

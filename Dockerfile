@@ -3,7 +3,7 @@ FROM python:3.12-alpine
 WORKDIR /app
 
 # Install build dependencies and curl
-RUN apk add --no-cache gcc musl-dev g++ postgresql-dev curl
+RUN apk add --no-cache gcc musl-dev g++ postgresql-dev curl && apk upgrade --no-cache
 
 # Upgrade pip to latest
 RUN pip3 install --upgrade pip
