@@ -35,16 +35,16 @@ The API will be available at http://localhost:5000
 
 ## Docker
 
-### Build Image
+### Build Image (or can use your own chosen version numbers)
 
 ```bash
-docker build -t flask-restx-backend:v1.0.0 .
+docker build -t flask-restx-backend:v1.0.1 .
 ```
 
 ### Run Container
 
 ```bash
-docker run -d -p 5000:5000 flask-restx-backend:v1.0.0
+docker run -d -p 5000:5000 flask-restx-backend:v1.0.1
 ```
 
 ### With Docker Network
@@ -54,7 +54,7 @@ docker network create flask-restx-network
 docker run -d --name flask-restx-backend \
   --network flask-restx-network \
   -p 5000:5000 \
-  flask-restx-backend:v1.0.0
+  flask-restx-backend:v1.0.1
 ```
 
 ## API Endpoints
