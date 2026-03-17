@@ -14,6 +14,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 ### Security
 
+## [1.0.2] - 2026-03-17
+
+### Security
+- Updated PyJWT from 2.8.0 to 2.12.0 (CVE-2026-32597: missing `crit` header validation per RFC 7515 §4.1.11)
+- Updated zlib from 1.3.1-r2 to 1.3.2-r0 (CVE-2026-22184, CVE-2026-27171)
+- Trivy security scan: 0 vulnerabilities
+
 ## [1.0.1] - 2026-02-23
 
 ### Security
@@ -54,6 +61,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Flask-SQLAlchemy 3.0.3
 - SQLAlchemy 2.0.12
 
-[Unreleased]: https://github.com/yourusername/yourrepo/compare/v1.0.1...HEAD
+[Unreleased]: https://github.com/yourusername/yourrepo/compare/v1.0.2...HEAD
+[1.0.2]: https://github.com/yourusername/yourrepo/compare/v1.0.1...v1.0.2
 [1.0.1]: https://github.com/yourusername/yourrepo/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/yourusername/yourrepo/releases/tag/v1.0.0
