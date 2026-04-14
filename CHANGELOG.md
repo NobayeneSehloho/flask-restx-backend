@@ -14,6 +14,46 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 ### Security
 
+## [1.0.3] - 2026-04-14
+
+### Security
+- **libcrypto3** (3.5.5-r0 → 3.5.6-r0)
+  - CVE-2026-28390 (HIGH): Denial of Service due to NULL pointer dereference in CMS
+  - CVE-2026-28388 (MEDIUM): Denial of Service due to NULL pointer dereference in delta CRL
+  - CVE-2026-28389 (MEDIUM): Denial of Service vulnerability in CMS processing
+  - CVE-2026-31790 (MEDIUM): Information Disclosure from Uninitialized Memory via Invalid RSA Public Key
+  - CVE-2026-2673 (LOW): TLS 1.3 server may choose unexpected key agreement group
+  - CVE-2026-28387 (LOW): Arbitrary code execution due to use-after-free in DANE TLSA authentication
+  - CVE-2026-31789 (LOW): Denial of Service via excessively large OCTET STRING conversion
+- **libssl3** (3.5.5-r0 → 3.5.6-r0)
+  - CVE-2026-28390 (HIGH): Denial of Service due to NULL pointer dereference in CMS
+  - CVE-2026-28388 (MEDIUM): Denial of Service due to NULL pointer dereference in delta CRL
+  - CVE-2026-28389 (MEDIUM): Denial of Service vulnerability in CMS processing
+  - CVE-2026-31790 (MEDIUM): Information Disclosure from Uninitialized Memory via Invalid RSA Public Key
+  - CVE-2026-2673 (LOW): TLS 1.3 server may choose unexpected key agreement group
+  - CVE-2026-28387 (LOW): Arbitrary code execution due to use-after-free in DANE TLSA authentication
+  - CVE-2026-31789 (LOW): Denial of Service via excessively large OCTET STRING conversion
+- **libuuid** (2.41.2-r0 → 2.41.4-r0)
+  - CVE-2026-27456 (MEDIUM): TOCTOU in mount program when setting up loop devices
+- **musl** (1.2.5-r21 → 1.2.5-r23)
+  - CVE-2026-40200 (UNKNOWN): Stack-based buffer overflow in musl libc
+  - CVE-2026-6042 (UNKNOWN): Security flaw in musl libc up to 1.2.6
+- **musl-dev** (1.2.5-r21 → 1.2.5-r23)
+  - CVE-2026-40200 (UNKNOWN): Stack-based buffer overflow in musl libc
+  - CVE-2026-6042 (UNKNOWN): Security flaw in musl libc up to 1.2.6
+- **musl-utils** (1.2.5-r21 → 1.2.5-r23)
+  - CVE-2026-40200 (UNKNOWN): Stack-based buffer overflow in musl libc
+  - CVE-2026-6042 (UNKNOWN): Security flaw in musl libc up to 1.2.6
+- **openssl-dev** (3.5.5-r0 → 3.5.6-r0)
+  - CVE-2026-28390 (HIGH): Denial of Service due to NULL pointer dereference in CMS
+  - CVE-2026-28388 (MEDIUM): Denial of Service due to NULL pointer dereference in delta CRL
+  - CVE-2026-28389 (MEDIUM): Denial of Service vulnerability in CMS processing
+  - CVE-2026-31790 (MEDIUM): Information Disclosure from Uninitialized Memory via Invalid RSA Public Key
+  - CVE-2026-2673 (LOW): TLS 1.3 server may choose unexpected key agreement group
+  - CVE-2026-28387 (LOW): Arbitrary code execution due to use-after-free in DANE TLSA authentication
+  - CVE-2026-31789 (LOW): Denial of Service via excessively large OCTET STRING conversion
+- Trivy security scan: 0 vulnerabilities
+
 ## [1.0.2] - 2026-03-17
 
 ### Security
@@ -61,7 +101,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Flask-SQLAlchemy 3.0.3
 - SQLAlchemy 2.0.12
 
-[Unreleased]: https://github.com/yourusername/yourrepo/compare/v1.0.2...HEAD
+[Unreleased]: https://github.com/yourusername/yourrepo/compare/v1.0.3...HEAD
+[1.0.3]: https://github.com/yourusername/yourrepo/compare/v1.0.2...v1.0.3
 [1.0.2]: https://github.com/yourusername/yourrepo/compare/v1.0.1...v1.0.2
 [1.0.1]: https://github.com/yourusername/yourrepo/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/yourusername/yourrepo/releases/tag/v1.0.0

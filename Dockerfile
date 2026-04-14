@@ -12,7 +12,7 @@ COPY requirements.txt .
 RUN pip3 install --no-cache-dir -r requirements.txt
 
 # Remove build dependencies to reduce image size (keep curl)
-RUN apk del gcc musl-dev g++
+RUN apk del gcc musl-dev g++ && apk upgrade --no-cache --available
 
 COPY app ./app
 
