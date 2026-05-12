@@ -14,6 +14,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 ### Security
 
+## [1.0.4] - 2026-05-12
+
+### Security
+- **nghttp2-libs** (1.68.0-r0 → 1.69.0-r0)
+  - CVE-2026-27135 (HIGH): Denial of Service via malformed HTTP/2 frames after session termination
+- **xz-libs** (5.8.2-r0 → 5.8.3-r0)
+  - CVE-2026-34743 (MEDIUM): Denial of Service via buffer overflow in index decoding
+- **pip** (26.0.1 → upgraded to latest)
+  - CVE-2026-3219 (MEDIUM): Incorrect file installation due to improper archive handling
+  - CVE-2026-6357 (MEDIUM): Arbitrary code execution or information disclosure via malicious wheel package
+- **python-dotenv** (1.0.0 → 1.2.2)
+  - CVE-2026-28684 (MEDIUM): Arbitrary file overwrite via symbolic link following
+- Removed pip from final image to reduce attack surface
+- Trivy security scan: 0 vulnerabilities
+
 ## [1.0.3] - 2026-04-14
 
 ### Security
@@ -101,7 +116,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Flask-SQLAlchemy 3.0.3
 - SQLAlchemy 2.0.12
 
-[Unreleased]: https://github.com/yourusername/yourrepo/compare/v1.0.3...HEAD
+[Unreleased]: https://github.com/yourusername/yourrepo/compare/v1.0.4...HEAD
+[1.0.4]: https://github.com/yourusername/yourrepo/compare/v1.0.3...v1.0.4
 [1.0.3]: https://github.com/yourusername/yourrepo/compare/v1.0.2...v1.0.3
 [1.0.2]: https://github.com/yourusername/yourrepo/compare/v1.0.1...v1.0.2
 [1.0.1]: https://github.com/yourusername/yourrepo/compare/v1.0.0...v1.0.1

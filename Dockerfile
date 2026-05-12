@@ -9,10 +9,10 @@ RUN apk update && apk add --no-cache gcc musl-dev g++ postgresql-dev curl && apk
 RUN pip3 install --upgrade pip
 
 COPY requirements.txt .
-RUN pip3 install --no-cache-dir -r requirements.txt
+RUN pip3 install --no-cache-dir -r requirements.txt && pip3 uninstall -y pip
 
 # Remove build dependencies to reduce image size (keep curl)
-RUN apk del gcc musl-dev g++ && apk upgrade --no-cache --available
+RUN apk del gcc musl-dev g++ && apk upgrade --no-cache nghttp2-libs xz-libs
 
 COPY app ./app
 
