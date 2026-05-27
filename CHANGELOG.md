@@ -14,6 +14,64 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 ### Security
 
+## [2.0.0] - 2026-05-27
+
+### Added
+- **Departments** — new model and full CRUD endpoints (`/api/departments`)
+  - `GET /api/departments/{id}` returns nested courses in the response
+  - `GET /api/departments/{id}/courses` — dedicated route to list a department's courses
+- **Student Enrolments** — many-to-many student-course relationship via `/api/student-enrolments`
+  - Students can now enrol in multiple courses
+  - Response includes resolved `student_name`, `course_name`, `enrolled_at`, and `status`
+- **Teacher Enrolments** — teacher-course assignment via `/api/enrolments` with `enrolled_at` and `status`
+- **Course-Department link** — courses now belong to a department (`department_id` required)
+- **Nested routes** for querying relationships:
+  - `GET /api/students/{id}/courses` — list courses a student is enrolled in
+  - `GET /api/teachers/{id}/courses` — list courses a teacher is assigned to
+  - `GET /api/courses/{id}/students` — list students enrolled in a course
+  - `GET /api/departments/{id}/courses` — list courses in a department
+- **PATCH endpoints** for partial updates on all resources:
+  - `PATCH /api/students/{id}` — update name, email, and/or student_number
+  - `PATCH /api/courses/{id}` — update name and/or department
+  - `PATCH /api/teachers/{id}` — update name and/or email
+  - `PATCH /api/departments/{id}` — update name
+- **Student fields** — `email` (required, unique) and `student_number` (required, unique)
+- **Teacher email** — teachers now have a required `email` field (unique)
+- **Enrolment metadata** — `enrolled_at` timestamp and `status` field (default: "active") on both student and teacher enrolments
+- **Cascade deletes** — deleting a department removes its courses and their enrolments; deleting a student/teacher removes their enrolments
+- **FK validation** — creating/updating a course with a non-existent `department_id` returns 404
+- Proper error handling on all endpoints (404 for missing resources, 409 for duplicates)
+- Input validation with `IntegrityError` handling and session rollback
+- Course response includes `department_name` for readability
+
+### Changed
+- **BREAKING**: `POST /api/students` no longer accepts `course_id` — use `/api/student-enrolments` instead
+- **BREAKING**: `POST /api/students` now requires `email` and `student_number` fields
+- **BREAKING**: Student response no longer includes `course_id`, now includes `email` and `student_number`
+- **BREAKING**: `POST /api/teachers` now requires `email` field
+- **BREAKING**: Teacher response now includes `email`
+- **BREAKING**: `POST /api/courses` now requires `department_id` (was optional)
+- **BREAKING**: Course response now includes `department_id` and `department_name`
+- **BREAKING**: Department response now includes nested `courses` array
+
+### Removed
+- Direct student-course foreign key relationship (replaced by `student_enrolment` table)
+- `greenlet` and `pyrsistent` dependencies (no longer needed)
+
+### Security
+- **flask-cors** 6.0.0 → 6.0.2
+- **Flask-SQLAlchemy** 3.0.3 → 3.1.1
+- **SQLAlchemy** 2.0.12 → 2.0.50
+- **Werkzeug** 3.1.6 → 3.1.8
+- **PyJWT** 2.12.0 → 2.13.0
+- **MarkupSafe** 2.1.2 → 3.0.3
+- **click** 8.1.3 → 8.4.1
+- **jsonschema** 4.17.3 → 4.26.0
+- **typing_extensions** 4.12.2 → 4.15.0
+- All dependencies updated to latest versions to address known CVEs
+- Resolves all CVEs identified in v1.0.4 (nghttp2-libs, xz-libs, pip, python-dotenv)
+- Trivy security scan: 0 vulnerabilities (OS + Python packages)
+
 ## [1.0.4] - 2026-05-12
 
 ### Security
@@ -116,7 +174,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Flask-SQLAlchemy 3.0.3
 - SQLAlchemy 2.0.12
 
-[Unreleased]: https://github.com/yourusername/yourrepo/compare/v1.0.4...HEAD
+[Unreleased]: https://github.com/yourusername/yourrepo/compare/v2.0.0...HEAD
+[2.0.0]: https://github.com/yourusername/yourrepo/compare/v1.0.4...v2.0.0
 [1.0.4]: https://github.com/yourusername/yourrepo/compare/v1.0.3...v1.0.4
 [1.0.3]: https://github.com/yourusername/yourrepo/compare/v1.0.2...v1.0.3
 [1.0.2]: https://github.com/yourusername/yourrepo/compare/v1.0.1...v1.0.2
