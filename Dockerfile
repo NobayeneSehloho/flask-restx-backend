@@ -2,8 +2,8 @@ FROM python:3.12-alpine
 
 WORKDIR /app
 
-# Install build dependencies and curl
-RUN apk update && apk add --no-cache gcc musl-dev g++ postgresql-dev curl && apk upgrade --no-cache --available
+# Install build dependencies and curl (postgresql-dev removed: app uses SQLite only)
+RUN apk update && apk add --no-cache gcc musl-dev g++ curl && apk upgrade --no-cache --available
 
 # Upgrade pip to latest
 RUN pip3 install --upgrade pip
@@ -12,7 +12,7 @@ COPY requirements.txt .
 RUN pip3 install --no-cache-dir -r requirements.txt && pip3 uninstall -y pip
 
 # Remove build dependencies to reduce image size (keep curl)
-RUN apk del gcc musl-dev g++ && apk upgrade --no-cache nghttp2-libs xz-libs
+RUN apk del gcc musl-dev g++
 
 COPY app ./app
 
