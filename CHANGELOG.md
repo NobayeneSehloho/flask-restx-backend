@@ -14,6 +14,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 ### Security
 
+## [2.0.1] - 2026-10-15
+
+### Security
+- Remediated **all 377 vulnerabilities** reported by Trivy across every
+  severity (1 CRITICAL, 166 HIGH, 129 MEDIUM, 79 LOW, 2 UNKNOWN) in the
+  `v2.0.0` image; the `v2.0.1` image scans clean (0 CVEs).
+- **PyJWT 2.13.0 → 2.15.0** — fixes CRITICAL `CVE-2026-102268` (authentication
+  bypass via improper public key validation) and the related HIGH/MEDIUM PyJWT
+  advisories.
+- **Werkzeug 3.1.8 → 3.1.9** — fixes `CVE-2026-102598` (DoS via `safe_join()`
+  Windows special device paths).
+- Alpine OS libraries (curl, openssl, libuuid, libxml2, sqlite-libs, c-ares,
+  zlib) patched by rebuilding against the current Alpine 3.23 package index.
+
+### Removed
+- **`postgresql-dev`** build dependency from the Dockerfile — the application
+  is SQLite-only and never used it. Removing it eliminated the entire
+  `libpq`/`libecpg`/`postgresql18-dev` CVE set (~185 findings) and cut the
+  image size roughly in half.
+
+### Changed
+- Dropped the redundant narrow `apk upgrade nghttp2-libs xz-libs` step; the
+  single `apk upgrade --no-cache --available` now governs OS package patching.
+- Image published to ECR as a multi-architecture manifest
+  (`linux/amd64` + `linux/arm64`).
+
 ## [2.0.0] - 2026-05-27
 
 ### Added
