@@ -11,12 +11,15 @@ from .api_models import (
 )
 from .extensions import db
 from .models import Course, Student, Teacher, Enrolment, Department, StudentEnrolment
+from .security import token_required
 
 ns = Namespace("api")
 
 
 @ns.route("/hello")
 class Hello(Resource):
+    method_decorators = [token_required]
+
     def get(self):
         return {"hello": "restx"}
 
@@ -25,6 +28,8 @@ class Hello(Resource):
 
 @ns.route("/departments")
 class DepartmentListAPI(Resource):
+    method_decorators = [token_required]
+
     @ns.marshal_list_with(department_model)
     def get(self):
         return Department.query.all()
@@ -44,6 +49,8 @@ class DepartmentListAPI(Resource):
 
 @ns.route("/departments/<int:id>")
 class DepartmentAPI(Resource):
+    method_decorators = [token_required]
+
     @ns.marshal_with(department_model)
     def get(self, id):
         return Department.query.get_or_404(id, description="Department not found")
@@ -82,6 +89,8 @@ class DepartmentAPI(Resource):
 
 @ns.route("/departments/<int:id>/courses")
 class DepartmentCoursesAPI(Resource):
+    method_decorators = [token_required]
+
     @ns.marshal_list_with(course_model)
     def get(self, id):
         dept = Department.query.get_or_404(id, description="Department not found")
@@ -92,6 +101,8 @@ class DepartmentCoursesAPI(Resource):
 
 @ns.route("/courses")
 class CourseListAPI(Resource):
+    method_decorators = [token_required]
+
     @ns.marshal_list_with(course_model)
     def get(self):
         return Course.query.all()
@@ -112,6 +123,8 @@ class CourseListAPI(Resource):
 
 @ns.route("/courses/<int:id>")
 class CourseAPI(Resource):
+    method_decorators = [token_required]
+
     @ns.marshal_with(course_model)
     def get(self, id):
         return Course.query.get_or_404(id, description="Course not found")
@@ -155,6 +168,8 @@ class CourseAPI(Resource):
 
 @ns.route("/courses/<int:id>/students")
 class CourseStudentsAPI(Resource):
+    method_decorators = [token_required]
+
     @ns.marshal_list_with(student_model)
     def get(self, id):
         Course.query.get_or_404(id, description="Course not found")
@@ -166,6 +181,8 @@ class CourseStudentsAPI(Resource):
 
 @ns.route("/students")
 class StudentListAPI(Resource):
+    method_decorators = [token_required]
+
     @ns.marshal_list_with(student_model)
     def get(self):
         return Student.query.all()
@@ -189,6 +206,8 @@ class StudentListAPI(Resource):
 
 @ns.route("/students/<int:id>")
 class StudentAPI(Resource):
+    method_decorators = [token_required]
+
     @ns.marshal_with(student_model)
     def get(self, id):
         return Student.query.get_or_404(id, description="Student not found")
@@ -233,6 +252,8 @@ class StudentAPI(Resource):
 
 @ns.route("/students/<int:id>/courses")
 class StudentCoursesAPI(Resource):
+    method_decorators = [token_required]
+
     @ns.marshal_list_with(course_model)
     def get(self, id):
         Student.query.get_or_404(id, description="Student not found")
@@ -244,6 +265,8 @@ class StudentCoursesAPI(Resource):
 
 @ns.route("/teachers")
 class TeacherListAPI(Resource):
+    method_decorators = [token_required]
+
     @ns.marshal_list_with(teacher_model)
     def get(self):
         return Teacher.query.all()
@@ -263,6 +286,8 @@ class TeacherListAPI(Resource):
 
 @ns.route("/teachers/<int:id>")
 class TeacherAPI(Resource):
+    method_decorators = [token_required]
+
     @ns.marshal_with(teacher_model)
     def get(self, id):
         return Teacher.query.get_or_404(id, description="Teacher not found")
@@ -304,6 +329,8 @@ class TeacherAPI(Resource):
 
 @ns.route("/teachers/<int:id>/courses")
 class TeacherCoursesAPI(Resource):
+    method_decorators = [token_required]
+
     @ns.marshal_list_with(course_model)
     def get(self, id):
         Teacher.query.get_or_404(id, description="Teacher not found")
@@ -315,6 +342,8 @@ class TeacherCoursesAPI(Resource):
 
 @ns.route("/enrolments")
 class EnrolmentListAPI(Resource):
+    method_decorators = [token_required]
+
     @ns.marshal_list_with(enrolment_model)
     def get(self):
         return Enrolment.query.all()
@@ -336,6 +365,8 @@ class EnrolmentListAPI(Resource):
 
 @ns.route("/enrolments/<int:id>")
 class EnrolmentAPI(Resource):
+    method_decorators = [token_required]
+
     @ns.marshal_with(enrolment_model)
     def get(self, id):
         return Enrolment.query.get_or_404(id, description="Enrolment not found")
@@ -351,6 +382,8 @@ class EnrolmentAPI(Resource):
 
 @ns.route("/student-enrolments")
 class StudentEnrolmentListAPI(Resource):
+    method_decorators = [token_required]
+
     @ns.marshal_list_with(student_enrolment_model)
     def get(self):
         return StudentEnrolment.query.all()
@@ -372,6 +405,8 @@ class StudentEnrolmentListAPI(Resource):
 
 @ns.route("/student-enrolments/<int:id>")
 class StudentEnrolmentAPI(Resource):
+    method_decorators = [token_required]
+
     @ns.marshal_with(student_enrolment_model)
     def get(self, id):
         return StudentEnrolment.query.get_or_404(id, description="Student enrolment not found")

@@ -13,6 +13,11 @@ def create_app():
     app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL", "sqlite:///db.sqlite3")
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
+    # Shared JWT signing key, read from env with a local/test fallback.
+    # Both /auth/login (signs) and token_required (verifies) use this same
+    # value via current_app.config["SECRET_KEY"], so HS256 round-trips.
+    app.config["SECRET_KEY"] = os.getenv("SECRET_KEY", "your-secret-key-change-in-production")
+
     @app.route('/health')
     def health():
         return jsonify({"status": "healthy"}), 200

@@ -14,6 +14,50 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 ### Security
 
+## [2.1.0] - 2026-10-16
+
+### Added
+- **JWT authentication enforcement** across the entire `api` namespace
+  (`/api/...`). A new `token_required` decorator (`app/security.py`) reads the
+  `Authorization: Bearer <token>` header, verifies the token signature and
+  expiry, and returns `401` for missing, malformed, expired, or invalid
+  tokens. Applied to all 17 Resource classes via
+  `method_decorators = [token_required]`.
+- **Swagger "Authorize" button** — the API now declares a `Bearer` security
+  scheme so the interactive docs can send the token when calling protected
+  endpoints.
+
+### Changed
+- The JWT signing key is now centralized in application config, read from the
+  `SECRET_KEY` environment variable with a local/test fallback, instead of a
+  constant defined in `auth.py`. The login endpoint (signing) and the
+  `token_required` verifier (verifying) now share this single value.
+
+### Security
+- All `/api/...` endpoints now reject unauthenticated requests. The login
+  endpoint (token issuance) and the `/health` check remain open by design so
+  that clients can obtain a token and container/load-balancer health checks
+  continue to succeed.
+- The token verifier pins the signing algorithm to `HS256` to prevent
+  algorithm-confusion attacks.
+
+### Production TO DO
+> This authentication is intended for a test environment. Harden the following
+> before using it beyond testing:
+- Provide a strong, randomly generated signing key via a secrets manager rather
+  than relying on the built-in fallback; refuse to start if it is unset.
+- Replace the in-memory user store and plaintext password check with a
+  persisted user model and hashed passwords.
+- Use short-lived access tokens with a refresh and revocation mechanism instead
+  of long-lived, non-revocable tokens.
+- Enforce TLS end to end.
+- Add rate limiting / brute-force protection on the login endpoint.
+- Log authentication failures and monitor `401` rates (never log tokens).
+- Restrict or disable the interactive API docs where they should not be
+  reachable.
+- Replace the deprecated `datetime.utcnow()` usage with a timezone-aware
+  equivalent.
+
 ## [2.0.1] - 2026-10-15
 
 ### Security
@@ -200,7 +244,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Flask-SQLAlchemy 3.0.3
 - SQLAlchemy 2.0.12
 
-[Unreleased]: https://github.com/yourusername/yourrepo/compare/v2.0.1...HEAD
+[Unreleased]: https://github.com/yourusername/yourrepo/compare/v2.1.0...HEAD
+[2.1.0]: https://github.com/yourusername/yourrepo/compare/v2.0.1...v2.1.0
 [2.0.1]: https://github.com/yourusername/yourrepo/compare/v2.0.0...v2.0.1
 [2.0.0]: https://github.com/yourusername/yourrepo/compare/v1.0.4...v2.0.0
 [1.0.4]: https://github.com/yourusername/yourrepo/compare/v1.0.3...v1.0.4

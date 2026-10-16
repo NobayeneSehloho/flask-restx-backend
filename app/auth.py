@@ -1,6 +1,6 @@
 from flask_restx import Namespace, Resource, fields
 from functools import wraps
-from flask import request
+from flask import request, current_app
 import jwt
 import datetime
 
@@ -10,8 +10,6 @@ ns = Namespace("auth", description="Authentication operations")
 users = {
     "admin@example.com": {"password": "admin123", "name": "Admin User"}
 }
-
-SECRET_KEY = "your-secret-key-change-in-production"
 
 login_model = ns.model('Login', {
     'email': fields.String(required=True, description='User email'),
@@ -32,7 +30,7 @@ class Login(Resource):
             token = jwt.encode({
                 'email': email,
                 'exp': datetime.datetime.utcnow() + datetime.timedelta(hours=24)
-            }, SECRET_KEY, algorithm='HS256')
+            }, current_app.config["SECRET_KEY"], algorithm='HS256')
             
             return {
                 'token': token,
